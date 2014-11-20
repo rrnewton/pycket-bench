@@ -29,7 +29,7 @@ set -e
 
 cd "$CHECKOUT"/../pycket/
 if ! [ -d ./pypy ]; then 
-  hg clone https://bitbucket.org/pypy/pypy
+  time hg clone https://bitbucket.org/pypy/pypy
 fi
 (cd pypy && hg checkout 74619)
 
