@@ -13,12 +13,6 @@ sar 2 2 || echo ok
 echo "And who"
 who -a || echo ok
 
-echo "\nFirst building all the compilers."
-(cd ..; ./setup.sh)
-# NOTEST=1 ./.jenkins_script.sh -j
-
-echo "\nReturned to benchmarking script."
-
 # CONVENTION: The working directory is passed as the first argument.
 CHECKOUT=$1
 shift || echo ok
@@ -26,14 +20,20 @@ shift || echo ok
 if [ "$CHECKOUT" == "" ]; then
   CHECKOUT=`pwd`
 fi
-
-echo "Running benchmarks remotely on server `hostname`"
-
-set -e
-
 # Switch to where the benchmarks are
 # ----------------------------------------
 cd "$CHECKOUT"/
+
+# ----------------------------------------
+echo "\nFirst building all the compilers."
+(cd ..; ./setup.sh)
+# NOTEST=1 ./.jenkins_script.sh -j
+
+# ----------------------------------------
+echo "\nReturned to benchmarking script."
+echo "Running benchmarks remotely on server `hostname`"
+
+set -e
 
 # Fetch data and build benchmark runner:
 # make
