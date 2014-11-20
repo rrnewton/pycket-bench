@@ -14,8 +14,7 @@ echo "And who"
 who -a || echo ok
 
 # NOTEST=1 ./.jenkins_script.sh -j
-
-echo "\nReturned to benchmarking script."
+# echo "\nReturned to benchmarking script."
 
 # CONVENTION: The working directory is passed as the first argument.
 CHECKOUT=$1
@@ -23,16 +22,6 @@ shift || echo ok
 
 if [ "$CHECKOUT" == "" ]; then
   CHECKOUT=`pwd`
-fi
-if [ "$JENKINS_GHC" == "" ]; then
-   echo "JENKINS_GHC unset"
-   export JENKINS_GHC=7.8.3
-fi
-if [ -f "$HOME/continuous_testing_setup/rn_jenkins_scripts/acquire_ghc.sh" ]; then
-  source $HOME/continuous_testing_setup/rn_jenkins_scripts/acquire_ghc.sh
-fi
-if [ -f "$HOME/continuous_testing_setup/rn_jenkins_scripts/acquire_cuda.sh" ]; then
-  source $HOME/continuous_testing_setup/rn_jenkins_scripts/acquire_cuda.sh
 fi
 
 echo "Running benchmarks remotely on server `hostname`"
