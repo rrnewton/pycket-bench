@@ -13,8 +13,11 @@ sar 2 2 || echo ok
 echo "And who"
 who -a || echo ok
 
+echo "\nFirst building all the compilers."
+(cd ..; ./setup.sh)
 # NOTEST=1 ./.jenkins_script.sh -j
-# echo "\nReturned to benchmarking script."
+
+echo "\nReturned to benchmarking script."
 
 # CONVENTION: The working directory is passed as the first argument.
 CHECKOUT=$1
@@ -58,5 +61,8 @@ TABLENAME=Pycket_benchmarks
 if [ "$MACHINECLASS" == "" ]; then
     export MACHINECLASS=`hostname -s`
 fi
+
+cabal sandbox init
+cabal install --bindir=. --program-suffix=.exe -j
 
 ./run-pycket-benchmarks.exe --keepgoing --trials=$TRIALS --fusion-upload --name=$TABLENAME --clientid=$CID --clientsecret=$SEC --hostname=$MACHINECLASS $*
