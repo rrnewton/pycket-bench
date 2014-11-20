@@ -20,20 +20,29 @@ shift || echo ok
 if [ "$CHECKOUT" == "" ]; then
   CHECKOUT=`pwd`
 fi
-# Switch to where the benchmarks are
-# ----------------------------------------
-cd "$CHECKOUT"/
+set -e
 
 # ----------------------------------------
-echo "\nFirst building all the compilers."
-(cd ..; ./setup.sh)
+# RRN: This doesn't work yet -- too many dependencies:
+# echo "\nFirst building all the compilers."
+# (cd ..; ./setup.sh)
+
+cd "$CHECKOUT"/../pycket/
+if ! [ -d ./pypy ]; then 
+  hg clone https://bitbucket.org/pypy/pypy
+fi
+(cd pypy && hg checkout 74619)
+
+# Eventually, follow this convention:
 # NOTEST=1 ./.jenkins_script.sh -j
 
 # ----------------------------------------
 echo "\nReturned to benchmarking script."
 echo "Running benchmarks remotely on server `hostname`"
 
-set -e
+# Switch to where the benchmarks are
+# ----------------------------------------
+cd "$CHECKOUT"/
 
 # Fetch data and build benchmark runner:
 # make
