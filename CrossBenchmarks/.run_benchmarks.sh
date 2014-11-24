@@ -32,6 +32,7 @@ if ! [ -d ./pypy ]; then
   time hg clone https://bitbucket.org/pypy/pypy
 fi
 (cd pypy && hg checkout 74619)
+make translate-jit
 
 # Eventually, follow this convention:
 # NOTEST=1 ./.jenkins_script.sh -j
@@ -75,6 +76,8 @@ fi
 HSBDEPS="../HSBencher/hsbencher ../HSBencher/hsbencher-fusion ../HSBencher/hgdata"
 
 cabal sandbox init
-cabal install $HSBDEPS --bindir=. --program-suffix=.exe -j
+cabal install $HSBDEPS ./ --program-suffix=.exe -j 
+#  --bindir=`pwd` 
+ln -f -s .cabal-sandbox/bin/run-pycket-benchmarks.exe
 
 ./run-pycket-benchmarks.exe --keepgoing --trials=$TRIALS --fusion-upload --name=$TABLENAME --clientid=$CID --clientsecret=$SEC --hostname=$MACHINECLASS $*
