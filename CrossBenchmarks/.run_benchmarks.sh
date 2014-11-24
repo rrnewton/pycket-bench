@@ -71,7 +71,10 @@ if [ "$MACHINECLASS" == "" ]; then
     export MACHINECLASS=`hostname -s`
 fi
 
+# Soon these will turn into proper hackage dependencies:
+HSBDEPS="../HSBencher/hsbencher ../HSBencher/hsbencher-fusion ../HSBencher/hgdata"
+
 cabal sandbox init
-cabal install --bindir=. --program-suffix=.exe -j
+cabal install $HSBDEPS --bindir=. --program-suffix=.exe -j
 
 ./run-pycket-benchmarks.exe --keepgoing --trials=$TRIALS --fusion-upload --name=$TABLENAME --clientid=$CID --clientsecret=$SEC --hostname=$MACHINECLASS $*

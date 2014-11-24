@@ -4,3 +4,6 @@
 [submodule "ChaperoneBenchmarks/src"]
 	path = ChaperoneBenchmarks/src
 	url = https://github.com/sabauma/pycket-benchmarks.git
+[submodule "HSBencher"]
+	path = HSBencher
+	url = git@github.com:rrnewton/HSBencher.git
