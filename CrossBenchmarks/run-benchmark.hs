@@ -28,9 +28,10 @@ benches =
   [ (mkBenchmark ("../bin/run-"++which) [mode, prog]
       (And [ allBenchParams, Set (Variant (which++mode)) (RuntimeArg "") ]))
      { progname = Just ("CrossBench-"++prog) }
-  | prog <- words "ack array1 browse cat conform cpstak ctak dderiv deriv destruc diviter divrec dynamic earley fft fib fibc fibfp gcbench gcold graphs lattice matrix maze mazefun mbrot nqueens nucleic paraffins parsing perm9 peval pi pnpoly primes puzzle ray scheme simplex slatex string sum sumfp sumloop tail tak takl trav1 trav2 triangl wc"
+  | prog <- words "ack array1 browse cat conform cpstak ctak dderiv deriv destruc diviter divrec dynamic earley fft fib fibc fibfp gcbench gcold graphs lattice matrix maze mazefun mbrot nqueens nucleic paraffins parsing perm9 peval pi pnpoly primes puzzle ray scheme simplex string sum sumfp sumloop tail tak takl trav1 trav2 triangl wc"
+-- slatex
 --  , mode <- ["-nothing", "-fixflo", "-unsafe"]
-  , mode <- ["-nothing", "-fixflo" ]
+  , mode <- ["-nothing"]
   , which <- ["racket", "pycket"] ]
 
 --    confidence_level: 0.95
