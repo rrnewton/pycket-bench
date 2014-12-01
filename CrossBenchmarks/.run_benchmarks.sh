@@ -33,7 +33,7 @@ if ! [ -d ./pypy ]; then
 fi
 (cd pypy && hg checkout 74619)
 make translate-jit
-raco pkg install --copy --name pycket ./pycket/pycket-lang/
+raco pkg install --skip-installed --copy --name pycket ./pycket/pycket-lang/
 
 # Eventually, follow this convention:
 # NOTEST=1 ./.jenkins_script.sh -j
